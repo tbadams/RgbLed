@@ -1,16 +1,19 @@
 import time
 import colorsys
-import pigpio
+import pigpio  # GPIO PWM library with hardware timing, prevents flickering
 
 PIGPIO_MAX = 255.0
 
 
 class RgbLed(object):
-    def __init__(self, red_gpio=16, green_gpio=20, blue_gpio=21, max_val=1.0):
+    def __init__(self, red_gpio=16, green_gpio=20, blue_gpio=21, brightness=1.0, max_val=1.0):
         self.pi = pigpio.pi()
         self.red = red_gpio
         self.green = green_gpio
         self.blue = blue_gpio
+        if brightness > 1.0:
+            raise ValueError("brightness must be <= 1.0")
+        self.brightness = brightness
         self.max = max_val
 
     def __del__(self):
@@ -18,15 +21,15 @@ class RgbLed(object):
 
     def r(self, value):
         """Set the red LED level to the specified value."""
-        self.pi.set_PWM_dutycycle(self.red, value * (PIGPIO_MAX / self.max))
+        self.pi.set_PWM_dutycycle(self.red, value * (PIGPIO_MAX / self.max * self.brightness))
 
     def g(self, value):
         """Set the green LED level to the specified value."""
-        self.pi.set_PWM_dutycycle(self.green, value * (PIGPIO_MAX / self.max))
+        self.pi.set_PWM_dutycycle(self.green, value * (PIGPIO_MAX / self.max * self.brightness))
 
     def b(self, value):
         """Set the blue LED level to the specified value."""
-        self.pi.set_PWM_dutycycle(self.blue, value * (PIGPIO_MAX / self.max))
+        self.pi.set_PWM_dutycycle(self.blue, value * (PIGPIO_MAX / self.max * self.brightness))
 
     def rgb(self, r=0.0, g=0.0, b=0.0):
         """Set the RGB LED to the RGB color specified."""
