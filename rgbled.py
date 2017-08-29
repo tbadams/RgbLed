@@ -56,10 +56,10 @@ class RgbLed(object):
         except KeyboardInterrupt:
             RUNNING = False
 
-    def hue_transit(self, start=0, end=1.0, duration=4):
+    def hue_transit(self, start=0.0, end=1.0, duration=4.0, tics=100.0):
         diff = end - start
-        for x in range(0, 1000):
-            self.hsv(start + (x / 1000.0) * diff)
-            time.sleep(duration / 1000.0)
+        for x in range(0, tics):
+            self.hsv(start + (x / tics) * diff)
+            time.sleep(duration / tics)
 
 
