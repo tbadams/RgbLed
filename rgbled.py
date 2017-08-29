@@ -28,7 +28,7 @@ class RgbLed(object):
         """Set the blue LED level to the specified value."""
         self.pi.set_PWM_dutycycle(self.blue, value * (PIGPIO_MAX / self.max))
 
-    def rgb(self, r, g, b):
+    def rgb(self, r=0.0, g=0.0, b=0.0):
         """Set the RGB LED to the RGB color specified."""
         self.r(r)
         self.g(g)
