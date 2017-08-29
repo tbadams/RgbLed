@@ -1,17 +1,25 @@
 from rgbled import RgbLed
 import time as sys_time
-from datetime import datetime, timedelta, time
+from datetime import datetime, time
 import colorsys
 from collections import deque
+
 
 TIME_KEY = 0
 HUE_KEY = 1
 alarm_colors = [
-    (time(7), (0, 0, 0)),
-    (time(7, 5), (0, 1, 0)),
+    (time(6), (0, 1, 0)),
+
+    (time(6, 49, 55), (0.25, 1, 0)),
+    (time(6, 50), (0.5, 1, 0)),
+
+    (time(7, 14, 55), (0.75, 0.75, 0)),
+    (time(7, 15), (1, 0.5, 0)),
+
+    (time(7, 29, 55), (1, 0.25, 0)),
     (time(7, 30), (1, 0, 0)),
-    (time(9), (0, 0, 0)),
-    (time(23), (0, 0, 0)),
+
+    (time(8), (0, 0, 0))
 ]
 led = RgbLed()
 
