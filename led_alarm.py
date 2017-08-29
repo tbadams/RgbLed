@@ -3,7 +3,6 @@ import time as sys_time
 from datetime import datetime, timedelta, time
 import colorsys
 from collections import deque
-import copy
 
 TIME_KEY = 0
 HUE_KEY = 1
@@ -12,13 +11,7 @@ alarm_colors = [
     (time(7, 5), (0, 1, 0)),
     (time(7, 30), (1, 0, 0)),
     (time(9), (0, 0, 0)),
-    (time(19, 8), (1,0,0)),
-    (time(19, 9), (1.0, 0.0, 0)),
-    (time(19, 10), (0.0, 1.0, 0)),
-    (time(19, 11), (1.0, 0.0, 0)),
-    (time(19, 12), (0.0, 1.0, 0)),
-    (time(19, 13), (1.0, 1.0, 0)),
-    (time(23), (1, 1, 1)),
+    (time(23), (0, 0, 0)),
 ]
 led = RgbLed()
 
@@ -57,7 +50,7 @@ try:
                 end_color = colorsys.rgb_to_hsv(*list(pop[HUE_KEY]))
                 # Calculate current color
                 cur_color = translate_triple(start_color, end_color, cross_fade_ratio)
-                print('diff:' + str(diff) + ' raw:' + str(raw_progress) + ' cross:' + str(cross_fade_ratio) + ' start:' + str(start_color) + ' end:' + str(end_color) + ' cur:' + str(cur_color))
+                # print('diff:' + str(diff) + ' raw:' + str(raw_progress) + ' cross:' + str(cross_fade_ratio) + ' start:' + str(start_color) + ' end:' + str(end_color) + ' cur:' + str(cur_color))
                 led.hsv(*cur_color)
                 break
             else:
